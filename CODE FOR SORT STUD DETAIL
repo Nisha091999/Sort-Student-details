@@ -1,0 +1,12 @@
+from operator import itemgetter
+
+l = []
+
+while True:
+    s = input("Enter Details: (Name, Age, Score) [Press Enter to end]: ")
+    if not s:
+        break
+    l.append(tuple(s.split(",")))
+
+sorted_list = sorted(l, key=itemgetter(0, 1, 2))
+print(sorted_list)
