@@ -1,0 +1,38 @@
+explanation of the code :
+
+def sort_tuples(tuples):
+    sorted_tuples = sorted(tuples, key=lambda x: (x[3], x[0].lower(), int(x[1]), int(x[2])))
+    return sorted_tuples
+This code defines a function called sort_tuples that takes a list of tuples as input. 
+It uses the sorted() function to sort the input tuples based on a specific sorting key. 
+The sorting key is defined using a lambda function lambda x: (x[3], x[0].lower(), int(x[1]), int(x[2])), 
+which specifies the order in which the tuples should be sorted. 
+The sorting is done based on the fourth element of each tuple (x[3]), then the first element converted to lowercase (x[0].lower()), 
+followed by the second and third elements converted to integers (int(x[1]) and int(x[2])). 
+The sorted tuples are stored in the variable sorted_tuples and returned by the function.
+
+
+tuples = []
+while True:
+    input_str = input("Enter a tuple (name, age, height, gender) or press Enter to finish: ")
+    if not input_str:
+        break
+    tuple_data = tuple(input_str.split(','))
+    tuples.append(tuple_data)
+
+This code initializes an empty list called tuples. It then enters a loop that continues indefinitely (while True) until the user chooses to exit. 
+Inside the loop, the user is prompted to enter a tuple in the format name, age, height, gender or press Enter to finish. 
+The input is stored in the variable input_str. If the user presses Enter without entering any data, the loop breaks and the program moves on. 
+Otherwise, the input string is split by comma using split(','), resulting in a list of substrings. 
+The tuple() function is then used to convert the list into a tuple called tuple_data. Finally, the tuple is appended to the tuples list.
+
+
+sorted_tuples = sort_tuples(tuples)
+This line calls the sort_tuples() function with the tuples list as input. 
+The function sorts the tuples according to the specified key and returns the sorted tuples, which are then stored in the variable sorted_tuples.
+
+
+for tuple_data in sorted_tuples:
+    print(tuple_data)
+This code iterates over each tuple in the sorted_tuples list. For each tuple, it prints the tuple data using the print() function. 
+The output format will be the tuple elements separated by commas.
