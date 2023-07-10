@@ -1,12 +1,25 @@
 from operator import itemgetter
 
-l = []
+class DetailsSorter:
+    def __init__(self):
+        self.details_list = []
+
+    def add_details(self, details):
+        self.details_list.append(details)
+
+    def sort_details(self):
+        sorted_list = sorted(self.details_list, key=itemgetter(0, 1, 2))
+        return sorted_list
+
+
+details_sorter = DetailsSorter()
 
 while True:
-    s = input("Enter Details: (Name, Age, Score) [Press Enter to end]: ")
-    if not s:
+    input_str = input("Enter Details: (Name, Age, Score) [Press Enter to end]: ")
+    if not input_str:
         break
-    l.append(tuple(s.split(",")))
+    details = tuple(input_str.split(","))
+    details_sorter.add_details(details)
 
-sorted_list = sorted(l, key=itemgetter(0, 1, 2))
-print(sorted_list)
+sorted_details = details_sorter.sort_details()
+print(sorted_details)
