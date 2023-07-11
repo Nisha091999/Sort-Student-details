@@ -1,14 +1,14 @@
-# Details Sorter
+In this modified version, we define a new method called get_sort_key within the DetailsSorter class. 
+This method returns a tuple containing the name, age, and score of a person, which will be used as the sorting key.
 
-This is a Python script that allows the user to enter details (name, age, and score) and sorts them based on specific criteria. 
-The script demonstrates the usage of classes, methods, and sorting in Python.
+Instead of using the itemgetter function, we pass the self.get_sort_key method as the sorting key to the sorted() function. 
+This allows us to achieve the same sorting based on the name, age, and score of each person.
 
-## Code Explanation
+By making these changes, we eliminate the need for importing the operator module and the itemgetter function, 
+while still achieving the desired sorting functionality.
 
-```python
-from operator import itemgetter
-This line imports the itemgetter function from the operator module. 
-The itemgetter function will be used later to specify the sorting key for the sorted function.
+
+Certainly! Here's an explanation of each line in the modified code along with examples:
 
 
 class DetailsSorter:
@@ -17,25 +17,32 @@ This line defines a class called DetailsSorter that will handle the sorting of d
 
     def __init__(self):
         self.details_list = []
-The __init__ method is the constructor for the DetailsSorter class. 
-It initializes an empty list called details_list, which will be used to store the details entered by the user.
+The __init__ method is the constructor for the DetailsSorter class. It initializes an empty list called details_list, 
+which will be used to store the details entered by the user.
 
 
     def add_details(self, details):
         self.details_list.append(details)
-The add_details method allows adding details to the details_list. 
-It takes a parameter called details, which should be a tuple containing the name, age, and score of a person. 
+The add_details method allows adding details to the details_list. It takes a parameter called details,
+which should be a tuple containing the name, age, and score of a person. 
 The method appends the details tuple to the details_list.
 
 
+    def get_sort_key(self, details):
+        return (details[0], details[1], details[2])
+The get_sort_key method is defined to return a tuple containing the name, age, and score of a person. 
+This method will be used as the sorting key. It takes a parameter called details, which is a tuple containing the details of a person.
+The method accesses the elements of the details tuple by their indices and returns them as a tuple.
+
+
     def sort_details(self):
-        sorted_list = sorted(self.details_list, key=itemgetter(0, 1, 2))
+        sorted_list = sorted(self.details_list, key=self.get_sort_key)
         return sorted_list
-The sort_details method sorts the details_list based on the name, age, and score of each person. 
-It uses the sorted function and specifies the sorting key using itemgetter(0, 1, 2).
-This means that the sorting will be done based on the first element (name), then the second element (age), 
-and finally the third element (score) of each tuple. 
+The sort_details method sorts the details_list based on the name, age, and score of each person.
+It uses the sorted() function and specifies the sorting key as self.get_sort_key. 
+This means that the sorting will be done based on the tuple returned by the get_sort_key method. 
 The sorted list is stored in the sorted_list variable, which is then returned.
+
 
 details_sorter = DetailsSorter()
 An instance of the DetailsSorter class is created and assigned to the variable details_sorter.
@@ -49,11 +56,56 @@ while True:
     details_sorter.add_details(details)
 This code block creates a loop that continues until the user enters an empty string. 
 It prompts the user to enter details in the specified format (name, age, and score). 
-The input is split by comma and converted into a tuple. The add_details method of the details_sorter object is then called to add the details to the list.
+The input string is split by comma using the split(",") method, which returns a list of individual details.
+The tuple() function is then used to convert the list into a tuple. The add_details method of the details_sorter object is called to add
+the details tuple to the details_list.
 
 
 sorted_details = details_sorter.sort_details()
-The sort_details method of the details_sorter object is called to sort the details. 
-The sorted details are assigned to the variable sorted_details.
+The sort_details method of the details_sorter object is called to sort the details. The sorted details are assigned to the variable sorted_details.
+
 
 print(sorted_details)
+Finally, the sorted details are printed to the console.
+I hope this explanation helps clarify how each line of the modified code works. Let me know if you have any further questions!
+
+
+
+In the given code, the execution starts from the line:
+
+
+details_sorter = DetailsSorter()
+This line creates an instance of the DetailsSorter class and assigns it to the variable details_sorter. 
+This instantiation triggers the execution of the __init__ method within the DetailsSorter class, which initializes the details_list attribute.
+
+After creating the instance, the code proceeds to the following block:
+
+
+while True:
+    input_str = input("Enter Details: (Name, Age, Score) [Press Enter to end]: ")
+    if not input_str:
+        break
+    details = tuple(input_str.split(","))
+    details_sorter.add_details(details)
+This block creates an infinite loop using while True. Within the loop, the user is prompted to enter details in the specified format.
+If the user inputs an empty string (presses Enter), the loop is broken using the break statement.
+
+For each non-empty input, the code splits the input string by commas using input_str.split(","). 
+The resulting list of details is converted to a tuple using tuple() and assigned to the variable details.
+The add_details method of the details_sorter object is then called to add the details tuple to the details_list attribute.
+
+Once the user ends the input by entering an empty string, the execution continues to the next line:
+
+
+sorted_details = details_sorter.sort_details()
+This line calls the sort_details method of the details_sorter object. The method performs the sorting based on the provided sorting key and 
+returns the sorted list of details. The sorted list is assigned to the variable sorted_details.
+
+Finally, the execution proceeds to the last line:
+
+
+print(sorted_details)
+This line prints the sorted list of details to the console.
+
+So, the execution starts with the instantiation of the DetailsSorter object and follows through the input loop,
+sorting the details, and then printing the sorted details.
